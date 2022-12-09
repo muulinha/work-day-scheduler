@@ -2,24 +2,54 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 // $(function () {
-var workingHours = ["9","10","11","12",13,14,15,16,17];
-var description = $(".time");
 
-  var d = new Date();
-  var hour = d.getHours();
+// Day Time on the top __________________________________________________________________________________
+var today = dayjs().format("dddd, MMMM D");
+$("#currentDay").text(today);
+// Day Time on the top __________________________________________________________________________________
 
-  for (var workingHoursIndex = 0; workingHoursIndex < workingHours.length; workingHoursIndex++) {
-    if (hour > workingHours[workingHoursIndex]) {
-    description.attr("id","past");
+
+
+// Past/Future background colors __________________________________________________________________________
+var currentHour = moment().hours();
+
+$(".time-block").each(function () {
+  var blockHour = parseInt($(this).attr("id").split("-")[1]);
+  // console.log(blockHour);
+ 
+  if (blockHour < currentHour) {
+    $(this).addClass("past");
   } else {
-    description.attr("id","future");
-  }
-};
+    $(this).addClass("future");
+}
+});
+// Past/Future background colors __________________________________________________________________________
 
 
- 
- 
+// PRESENT Click ________________________________________________________________________________________
+$( ".description" ).on( "click", function() {
+$(".description").removeClass("present");
+$(this).addClass("present");
+});
+// PRESENT Click ________________________________________________________________________________________
 
+
+// Save buton _______________________________________________________________________________________________
+$('.saveBtn').click(function() {
+  let elementId = $(this).parent().attr('id');
+  let data = $(this).parent().children('textarea').val();
+  console.log(data)
+  localStorage.setItem(elementId, data);
+});
+
+$(document).ready(function() {
+  $('.description').each(function() {
+    let elementId = $(this).parent().attr('id');
+    let savedData = localStorage.getItem(elementId);
+    $(this).text(savedData);
+  });
+});
+// Save buton _______________________________________________________________________________________________
 
 
 
@@ -42,60 +72,3 @@ var description = $(".time");
 //   //
 //   // TODO: Add code to display the current date in the header of the page.
 // });
-
-
-// Day Time on the top __________________________________________________________________________________
-var today = dayjs().format("dddd, MMMM D");
-$("#currentDay").text(today);
-// Day Time on the top __________________________________________________________________________________
-
-
-
-
-
-
-
-
-// each timeblock is color coded to indicate whether it is in the past, present, or future
-// var timeNow = dayjs().format("hh:mm:ss");
-// var hourTen = dayjs("11:00").format('hh:mm');
-// var description = document.querySelector(".description");
-
-// console.log(timeNow);
-// console.log(hourTen);
-
-// if (timenow - hourTen < 0) {
-// description.attr("class", "past");
-//   };
-// click the save button for that timeblock THEN the text for that event is saved in local storage
-// var textArea9 = document.querySelector("#description9")
-
-// function storage() {
-//   var lastGrade = JSON.parse(localStorage.getItem("savedTask"));
-//   if (lastGrade !== null) {
-//     textArea9.innerHTML = task;
-//     lists = lastGrade;
-// } else {
-//   return;
-// };
-// }
-
-// var saveBtn = document.querySelector(".btn")
-// saveBtn.addEventListener("click", function() {
-//   var savedTask = {
-//     task: textArea9.value,
-//   };
-//   localStorage.setItem("savedTask", JSON.stringify(savedTask));
-//   storage();
-//   }
-// );
-
-
-
-
-// WHEN I refresh the page THEN the saved events persist
-
-
-
-
-
