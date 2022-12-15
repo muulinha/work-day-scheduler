@@ -9,7 +9,7 @@ It's simple to use and you can plan your day effectivelly.
 
 ## Demonstration
 
-![Printscreen of the web application](Assets\images\05-third-party-apis-homework-demo.gif)
+![Printscreen of the web application](/Assets/images/05-third-party-apis-homework-demo.gif)
 
 ## Credits
 
